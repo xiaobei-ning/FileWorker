@@ -9,11 +9,8 @@ const {
 import { createS3Client } from "../utils/utils";
 
 
-export default {
-    async fetch(
-      request,
-      env,
-    ): Promise<Response> {
+export const onRequest: PagesFunction<Env> = async (context) => {
+      const {env, request } = context
       const bucket = env.BUCKET;
   
       const url = new URL(request.url);
@@ -142,5 +139,4 @@ export default {
             headers: { Allow: "PUT, POST, GET, DELETE" },
           });
       }
-    },
-  } satisfies ExportedHandler<Env>;
+    }
